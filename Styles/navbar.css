@@ -1,0 +1,115 @@
+.navbar{
+  height:100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color:#fffaeb;
+  z-index: 100;
+}
+
+.left-section{
+  width: 350px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.school-logo{
+  height: 80px;
+  border-radius: 50px;
+  margin-top: 5px;
+  margin-left: 50px;
+  animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.logo-name-class{
+  margin-left: 20px;
+  margin-bottom: 10px;
+
+}
+
+.logo-name{
+  font-size: 50px;
+  font-weight: 1000;
+  letter-spacing: 16px;
+  
+}
+
+.logo-motive{
+  font-size: 18px;
+  font-weight: 600;
+  
+}
+
+
+.middel-section{
+  width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.middel-section ul,
+.right-section ul,
+.right-section-login ul{
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.middel-section a,
+.right-section a,
+.right-section-login a{
+  height: 50px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: black;
+  font-weight: 500;
+  font-size: 22px;
+  
+}
+
+.middel-section a:hover,
+.right-section a:hover,
+.right-section-login a:hover{
+  background-color: #fffaeb;
+  transform: translateY(8px);
+  transition: 1s;
+  
+}
+
+
+.right-section,
+.right-section-login{
+  width: 350px;
+  display: flex;
+  align-items: center;
+
+}
+
+.right-section a,
+.right-section-login a{
+  padding: 0px 30px;
+  margin-left: 70px;
+}
+
+
+
+
+

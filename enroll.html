@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll - Alpha Model's International School</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="Styles/navbar.css">
+    <link rel="stylesheet" href="Styles/loginpage.css">
+    <link rel="stylesheet" href="Styles/general.css">
+    <link rel="stylesheet" href="Styles/enrollpage.css">
+    <link rel="stylesheet" href="Styles/AllShouldFollow.css">
+    <link rel="stylesheet" href="static/css/chatbot.css">
+  </head>
+    <body>
+
+
+    <nav class="navbar">
+      <div class="left-section">
+        <img class="school-logo"  src="Images/NavBar/School-logo.png">
+
+        <div class="logo-name-class">
+          <p class="logo-name">AMS</p>
+          <p class="logo-motive"> Light-Learn-Lead</p>
+        </div>
+
+      </div>
+
+      <div class="right-section-login">
+
+        <ul>
+          <li><a href="/main"> About</a></li>
+
+        </ul>
+
+      </div>
+    </nav>
+
+    <main>
+
+      <div class="grid-zero-enroll"> </div>
+      <div class="grid-one-enroll">
+        <div class="address-details">
+            <div class="contact-box">
+              <p class="contact-details"> Contact Details</p>
+            <table>
+              <tr>
+                <td><i class="fas fa-map-marker-alt icon"></i> Location</td>
+                <td class="description-details">
+                  Alpha Model's International School <br>
+                   Plot no : 395,Road no:06,Raghavendra Colony <br>
+                   Beeramguda, Telangana 502032 <br>
+                  <a href="https://www.google.com/maps/place/Alpha+Model+School+Beeramguda/@17.5268637,78.2988005,17z/data=!3m1!4b1!4m6!3m5!1s0x3bcb9381c2cf793b:0x4cf4e6310fd39286!8m2!3d17.5268586!4d78.3013754!16s%2Fg%2F11sc79n_96?entry=ttu&g_ep=EgoyMDI1MDgxMy4wIKXMDSoASAFQAw%3D%3D"> <i class="fas fa-map-marker-alt"></i> Get Directions</a>
+                </td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-envelope icon"></i> For Admission</td>
+                <td class="description-details">admissions@alphamodels.in</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-envelope icon"></i> For All Enquiries</td>
+                <td class="description-details">enquiry@alphamodels.in</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-envelope icon"></i> For Jobs</td>
+                <td class="description-details">hr@alphamodels.in</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-phone icon"></i> Contact Us</td>
+                <td class="description-details">9949128732</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+      <div class="form-container">
+        <div id="form-success" style="display: none; color: green; text-align: center; padding: 15px; margin-bottom: 20px; background-color: #e8f5e9; border-radius: 5px;">
+          Thank you for your application! We will contact you soon.
+        </div>
+        <div id="form-error" style="display: none; color: red; text-align: center; padding: 15px; margin-bottom: 20px; background-color: #ffebee; border-radius: 5px;">
+          There was an error submitting your application. Please try again.
+        </div>
+        <form id="enrollment-form">
+          <input type="text" id="parent-name" name="parent_name" placeholder="Enter Parent Name *" required>
+          <input type="email" id="email" name="email" placeholder="Enter Parent's Email Address *" required>
+          <input type="tel" id="phone" name="phone" placeholder="Enter Parent's Contact Number" required>
+          <input type="text" id="city" name="city" placeholder="Current City of Residence *" required>
+
+          <select id="grade" name="grade" required class="childs-block">
+            <option value="">Select Child's Grade *</option>
+            <option value="kg">Kindergarten</option>
+            <option value="1">Grade 1</option>
+            <option value="2">Grade 2</option>
+            <option value="3">Grade 3</option>
+            <option value="4">Grade 4</option>
+            <option value="5">Grade 5</option>
+            <option value="6">Grade 6</option>
+            <option value="7">Grade 7</option>
+          </select>
+
+          <textarea id="message" name="message" placeholder="Enter Message"></textarea>
+
+          <button type="submit">SUBMIT</button>
+        </form>
+      </div>
+      </div>
+    </main>
+ 
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('enrollment-form');
+        const successMessage = document.getElementById('form-success');
+        const errorMessage = document.getElementById('form-error');
+        
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          
+          // Hide any previous messages
+          successMessage.style.display = 'none';
+          errorMessage.style.display = 'none';
+          
+          // Get form data
+          const formData = {
+            parent_name: document.getElementById('parent-name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            city: document.getElementById('city').value,
+            grade: document.getElementById('grade').value,
+            message: document.getElementById('message').value
+          };
+          
+          // Send data to backend API
+          fetch('/api/enroll', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.ok) {
+              // Show success message
+              successMessage.style.display = 'block';
+              form.reset();
+            } else {
+              // Show error message
+              errorMessage.textContent = data.error || 'There was an error submitting your application. Please try again.';
+              errorMessage.style.display = 'block';
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            errorMessage.textContent = 'Network error. Please try again later.';
+            errorMessage.style.display = 'block';
+          });
+        });
+      });
+    </script>
+    
+    <!-- Chatbot Script -->
+    <script src="static/js/chatbot.js"></script>
+  </body>
+</html>
